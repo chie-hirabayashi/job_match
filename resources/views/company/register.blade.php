@@ -1,7 +1,8 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-        
-        <h2 class="text-center font-medium text-gray-700 mb-4">企業アカウント登録</h2>
+        <x-slot name="logo">
+            <x-jet-authentication-card-logo />
+        </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
 
@@ -11,6 +12,11 @@
             <div>
                 <x-jet-label for="name" value="{{ __('Name') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="company_name" value="{{ __('会社名') }}" />
+                <x-jet-input id="company_name" class="block mt-1 w-full" type="text" name="company_name" :value="old('company_name')" required autofocus autocomplete="company_name" />
             </div>
 
             <div class="mt-4">
