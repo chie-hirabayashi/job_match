@@ -15,6 +15,13 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->string('name');
+            $table->string('profile_photo_path', 2048)->nullable();
+            $table->text('profile')->nullable();
             $table->timestamps();
         });
     }
