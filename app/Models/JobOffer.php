@@ -45,4 +45,14 @@ class JobOffer extends Model
     {
         return $this->belongsTo(Occupation::class);
     }
+
+    /**
+     * Get all of the jobOfferViews for the JobOffer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jobOfferViews()
+    {
+        return $this->hasMany(JobOfferView::class);
+    }
 }
