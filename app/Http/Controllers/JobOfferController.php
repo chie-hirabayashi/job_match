@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobOffer;
+use App\Models\JobOfferView;
 use App\Models\Occupation;
 use Illuminate\Http\Request;
 use App\Http\Requests\JobOfferRequest;
+use Illuminate\Support\Facades\Auth;
 
 class JobOfferController extends Controller
 {
@@ -63,7 +65,11 @@ class JobOfferController extends Controller
      */
     public function show(JobOffer $job_offer)
     {
-        //
+        JobOfferView::updateOrCreate([
+            'job_offer_id' => $job_offer->id,
+            'user_id' => Auth::user()->id,
+        ]);
+        return view('job_offers.show')->with(compact('job_offer'));
     }
 
     /**

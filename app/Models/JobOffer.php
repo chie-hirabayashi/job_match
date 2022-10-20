@@ -37,12 +37,22 @@ class JobOffer extends Model
     }
 
     /**
-     * Get all of the occupation for the JobOffer
+     * Get the occupation that owns the JobOffer
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function occupation()
     {
-        return $this->hasMany(Occupation::class);
+        return $this->belongsTo(Occupation::class);
+    }
+
+    /**
+     * Get all of the jobOfferViews for the JobOffer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jobOfferViews()
+    {
+        return $this->hasMany(JobOfferView::class);
     }
 }

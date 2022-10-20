@@ -46,6 +46,12 @@
                                 {{ __('Manage Account') }}
                             </div>
 
+                            @can ('create', App\Models\JobOffer::class)
+                                <x-jet-dropdown-link href="{{ route('job_offers.create') }}">
+                                    {{ '求人情報登録' }}
+                                </x-jet-dropdown-link>
+                            @endcan
+
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
@@ -106,6 +112,12 @@
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
+
+                @can ('create', App\Models\JobOffer::class)
+                    <x-jet-dropdown-link href="{{ route('job_offers.create') }}">
+                        {{ '求人情報登録' }}
+                    </x-jet-dropdown-link>
+                @endcan
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" x-data>
