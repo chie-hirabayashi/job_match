@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobOffer;
 use App\Models\Occupation;
 use Illuminate\Http\Request;
+use App\Http\Requests\JobOfferRequest;
 
 class JobOfferController extends Controller
 {
@@ -32,12 +33,26 @@ class JobOfferController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\JobOfferRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JobOfferRequest $request)
     {
-        //
+        $job_offer = new JobOffer($request->all());
+        $job_offer->company_id = $request->user()->company->id;
+
+        try {
+            // 登録
+            $job_offer->save();
+        } catch (\Exception $e) {
+            // logger($e); // storage>logs>laravel.logにエラー登録
+            return back()->withInput()
+                ->withErrors('求人情報登録処理でエラーが発生しました');
+        }
+
+        return redirect()
+            ->route('job_offers.show', $job_offer)
+            ->with('notice', '求人情報を登録しました');
     }
 
     /**
@@ -65,11 +80,11 @@ class JobOfferController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\JobOfferRequest  $request
      * @param  \App\Models\JobOffer  $job_offer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobOffer $job_offer)
+    public function update(jobOfferRequest $request, JobOffer $job_offer)
     {
         //
     }
