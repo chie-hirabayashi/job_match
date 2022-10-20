@@ -63,7 +63,7 @@ class JobOfferController extends Controller
      */
     public function show(JobOffer $job_offer)
     {
-        //
+        return view('job_offers.show')->with(compact('job_offer'));
     }
 
     /**
