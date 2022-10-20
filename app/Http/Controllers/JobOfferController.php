@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobOffer;
+use App\Models\Occupation;
 use Illuminate\Http\Request;
 
 class JobOfferController extends Controller
@@ -24,7 +25,8 @@ class JobOfferController extends Controller
      */
     public function create()
     {
-        //
+        $occupations = Occupation::all();
+        return view('job_offers.create')->with(compact('occupations'));
     }
 
     /**
@@ -41,10 +43,10 @@ class JobOfferController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobOffer  $jobOffer
+     * @param  \App\Models\JobOffer  $job_offer
      * @return \Illuminate\Http\Response
      */
-    public function show(JobOffer $jobOffer)
+    public function show(JobOffer $job_offer)
     {
         //
     }
@@ -52,10 +54,10 @@ class JobOfferController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobOffer  $jobOffer
+     * @param  \App\Models\JobOffer  $job_offer
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobOffer $jobOffer)
+    public function edit(JobOffer $job_offer)
     {
         //
     }
@@ -64,10 +66,10 @@ class JobOfferController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\JobOffer  $jobOffer
+     * @param  \App\Models\JobOffer  $job_offer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobOffer $jobOffer)
+    public function update(Request $request, JobOffer $job_offer)
     {
         //
     }
@@ -75,10 +77,10 @@ class JobOfferController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobOffer  $jobOffer
+     * @param  \App\Models\JobOffer  $job_offer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobOffer $jobOffer)
+    public function destroy(JobOffer $job_offer)
     {
         //
     }
