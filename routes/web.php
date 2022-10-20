@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobOfferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,13 @@ Route::get('company/register', function () {
     return view('company.register');
 })->middleware('guest')
     ->name('company.register');
+
+// 企業アカウントのみのルーティング
+Route::resource('job_offers', JobOfferController::class)
+    ->only(['create', 'store', 'edit', 'update', 'destroy'])
+    ->middleware('can:company'); //ゲートでcompanyのみ許可
+
+// ログインしている時にルーティング
+Route::resource('job_offers', JobOfferController::class)
+    ->only(['show', 'index'])
+    ->middleware('auth');  //認証があれば許可

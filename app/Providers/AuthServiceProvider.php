@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +26,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Gate::define('ゲート名', 処理);
+        // あるUserモデルにcompanyがあるか確認、あればtrueで許可、なければfalseで非許可
+        Gate::define('company', function (User $user)
+        {
+            return isset($user->company);
+        });
+
+        Gate::define('user', function (User $user)
+        {
+            return !(isset($user->company));
+        });
     }
 }

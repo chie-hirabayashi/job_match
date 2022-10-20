@@ -133,4 +133,17 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+    'attributes'           => [
+        'title' => 'タイトル',
+        'occupation_id' => '職種',
+        'due_date' => '募集期限',
+        'description' => '詳細',
+        'status' => 'ステータス',
+    ],
+    // DBのカラム名を日本語化する
+    'values' => [
+        'due_date' => [
+            'today' => '今日',
+        ]
+    ]
 ];

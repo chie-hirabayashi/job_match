@@ -9,6 +9,23 @@ class JobOffer extends Model
 {
     use HasFactory;
 
+    // マジックナンバー(作成者本人にしか意味が分からない値)が分かるように定数として定義
+    // 公開非公開のステータス
+    const STATUS_CLOSE = 0;
+    const STATUS_OPEN = 1;
+    const STATUS_LIST = [
+        self::STATUS_CLOSE => '未公開',
+        self::STATUS_OPEN => '公開',
+    ];
+
+    protected $fillable = [
+        'title',
+        'occupation_id',
+        'due_date',
+        'description',
+        'is_published',
+    ];
+
     /**
      * Get the Company that owns the JobOffer
      *
