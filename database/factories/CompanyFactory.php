@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 class CompanyFactory extends Factory
 {
@@ -14,7 +15,9 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'name' => $this->faker->unique()->company,
+            'profile' => $this->faker->realText,
         ];
     }
 }
