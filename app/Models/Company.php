@@ -30,4 +30,14 @@ class Company extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    /**
+     * Get all of the jobOffers for the Company
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jobOffers()
+    {
+        return $this->hasMany(jobOffer::class);
+    }
 }
