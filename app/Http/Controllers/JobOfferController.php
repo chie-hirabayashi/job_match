@@ -29,7 +29,7 @@ class JobOfferController extends Controller
         $job_offers->appends($params);
         $occupations = Occupation::all();
 
-        return view('job_offers.index')->with(compact('job_offers', 'occupations'));
+        return view('job_offers.index')->with(compact('job_offers', 'occupations', 'params'));
     }
 
     /**
