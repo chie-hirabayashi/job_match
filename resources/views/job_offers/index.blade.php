@@ -32,40 +32,40 @@
                 </ul>
             </div>
             <div class="w-full">
-                @foreach ($job_offers as $j)
+                @foreach ($job_offers as $job_offer)
                     <div class="bg-white w-full px-10 py-8 hover:shadow-2xl transition duration-500">
                         <div class="mt-4">
                             <div class="flex justify-between text-sm items-center mb-4">
                                 <div class="border border-gray-900 px-2 h-7 leading-7 rounded-full">
-                                    {{ $j->occupation->name }}
+                                    {{ $job_offer->occupation->name }}
                                 </div>
                                 <div class="text-gray-700 text-sm text-right">
-                                    <span>応募期限 :{{ $j->due_date }}</span>
+                                    <span>応募期限 :{{ $job_offer->due_date }}</span>
                                     <span class="inline-block mx-1">|</span>
-                                    <span>{{ $j->jobOfferViews->count() }} views</span>
+                                    <span>{{ $job_offer->jobOfferViews->count() }} views</span>
                                 </div>
                             </div>
-                            <h2 class="text-lg text-gray-700 font-semibold">{{ $j->title }}
+                            <h2 class="text-lg text-gray-700 font-semibold">{{ $job_offer->title }}
                             </h2>
                             <p class="mt-4 text-md text-gray-600">
-                                {{ Str::limit($j->description, 50,  '...') }}
+                                {{ Str::limit($job_offer->description, 50,  '...') }}
                             </p>
                             <div class="flex justify-between items-center">
                                 <div class="mt-4 flex items-center space-x-4 py-6">
                                     <div>
                                         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                             <img class="h-8 w-8 rounded-full object-cover" 
-                                                src="{{ $j->company->profile_photo_url }}" 
-                                                alt="{{ $j->company->name }}" />
+                                                src="{{ $job_offer->company->profile_photo_url }}" 
+                                                alt="{{ $job_offer->company->name }}" />
                                         @endif
                                     </div>
                                     <div class="text-sm font-semibold">
-                                        {{ $j->company->name }}
-                                        <span class="font-normal ml-2">5 minutes</span>
+                                        {{ $job_offer->company->name }}
+                                        <span class="font-normal ml-2">{{ $job_offer->created_at->diffForHumans() }}</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <a href="{{ route('job_offers.show', $j) }}" 
+                                    <a href="{{ route('job_offers.show', $job_offer) }}" 
                                         class="flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600 hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 mt-4 px-5 py-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
                                         more
                                     </a>
