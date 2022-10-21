@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,6 +34,15 @@ class JobOffer extends Model
         'description',
         'is_published',
     ];
+
+    // controllerでデータを取得する際の検索として書いてもいいが煩雑になるので、Builderを使用してモデルにインスタンス作成
+    // 検索の間に挟んで更に検索する
+    public function scopePublished(Builder $query)
+    {
+        $query->where('is_published', true)
+            ->where('due_date', '>=', now());
+        return $query;
+    }
 
     /**
      * Get the Company that owns the JobOffer
