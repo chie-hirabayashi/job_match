@@ -6,7 +6,14 @@
                 {{-- JobOfferモデルに定義したSORT_LISTに基づいて、並べ替えできるようにする --}}
                 @foreach (App\Models\JobOffer::SORT_LIST as $value => $name)
                     <li class="ml-4">
-                        <a href="" class="hover:text-blue-500">
+                        <a href="/?sort={{ $value }}"
+                            class="hover:text-blue-500 
+                                @if (Request::get('sort') == $value 
+                                    || (empty(Request::get('sort'))
+                                        && App\Models\JobOffer::SORT_NEW_ARRIVALS == $value))
+                                    text-green-500 font-bold
+                                @endif
+                            ">
                             {{ $name }}
                         </a>
                     </li>

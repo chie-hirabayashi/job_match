@@ -35,6 +35,7 @@ class JobOffer extends Model
         'is_published',
     ];
 
+// 以下、スコープ
     // controllerでデータを取得する際の検索として書いてもいいが煩雑になるので、Builderを使用してモデルにインスタンス作成
     // 検索の間に挟んで更に検索する
     public function scopePublished(Builder $query)
@@ -53,7 +54,25 @@ class JobOffer extends Model
         return $query;
     }
 
+    public function scopeOrder(Builder $query, $params)
+    {
+        // ソートがないorソートが1の場合、新着順
+        if ((empty($params['sort'])) ||
+            (! empty($params['sort']) && $params['sort'] == self::SORT_NEW_ARRIVALS)
+        ) {
+            $query->latest();
+        // ソートが2の場合、人気順
+        } elseif (! empty($params['sort']) && $params['sort'] == self::SORT_VIEW_RANK) {
+            // withCountでモデルの件数を取得
+            $query->withCount('jobOfferViews')
+                // withCountで取得したものをソートするときはテーブル名_countで
+                ->orderBy('job_offer_views_count', 'desc');
+        }
 
+        return $query;
+    }
+
+// 以下、リレーション
     /**
      * Get the Company that owns the JobOffer
      *
