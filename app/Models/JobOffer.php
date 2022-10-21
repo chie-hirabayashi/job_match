@@ -44,6 +44,16 @@ class JobOffer extends Model
         return $query;
     }
 
+    public function scopeSearch(Builder $query, $params)
+    {
+        if (!empty($params['occupation_id'])) {
+            $query->where('occupation_id', $params['occupation_id']);
+        }
+
+        return $query;
+    }
+
+
     /**
      * Get the Company that owns the JobOffer
      *

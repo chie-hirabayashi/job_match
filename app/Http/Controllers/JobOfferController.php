@@ -16,12 +16,16 @@ class JobOfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $job_offers = JobOffer::with(['company', 'occupation'])
+        // クエリパラメータ(urlパラメータとも言う。urlに?で入ってくる検索条件など)取得
+        $paramus = $request->query();
+        $job_offers = JobOffer::search($paramus)
+            ->with(['company', 'occupation'])
             ->published()
             ->latest()
             ->paginate(5);
+        $job_offers->appends($paramus);
         $occupations = Occupation::all();
 
         return view('job_offers.index')->with(compact('job_offers', 'occupations'));

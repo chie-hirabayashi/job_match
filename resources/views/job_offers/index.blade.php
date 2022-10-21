@@ -18,13 +18,14 @@
                 <h3 class="mb-3 text-gray-400 text-sm">検索条件</h3>
                 <ul>
                     <li class="mb-2">
-                        <a href="/" class="hover:text-blue-500">
+                        <a href="/" class="hover:text-blue-500 {{ Request::get('occupation_id') ? '' : 'text-green-500 font-bold'}}">
                             全て
                         </a>
                     </li>
                     @foreach ($occupations as $o)
                         <li class="mb-2">
-                            <a href="/?occupation_id={{ $o->id }}" class="hover:text-blue-500">
+                            <a href="/?occupation_id={{ $o->id }}"
+                                class="hover:text-blue-500 {{ Request::get('occupation_id') == $o->id ? 'text-green-500 font-bold' : ''}}">
                                 {{ $o->name }}
                             </a>
                         </li>
