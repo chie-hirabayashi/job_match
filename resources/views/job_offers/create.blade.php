@@ -47,7 +47,7 @@
                     公開状況
                 </label>
                 @foreach (App\Models\JobOffer::STATUS_LIST as $value => $name)
-                    <input type="radio" name="is_published" value="{{ $value }}" required>
+                    <input type="radio" name="is_published" value="{{ $value }}" required {{ old('is_published') == $value ? 'checked' : '' }}>
                     <label class="text-white mr-2">{{ $name }}</label>
                 @endforeach
             </div>
