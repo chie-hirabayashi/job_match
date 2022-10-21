@@ -18,7 +18,10 @@ class JobOfferController extends Controller
      */
     public function index()
     {
-        //
+        $job_offers = JobOffer::with(['company', 'occupation'])->latest()->paginate(5);
+        $occupations = Occupation::all();
+
+        return view('job_offers.index')->with(compact('job_offers', 'occupations'));
     }
 
     /**

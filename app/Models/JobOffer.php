@@ -9,6 +9,14 @@ class JobOffer extends Model
 {
     use HasFactory;
 
+    // 並び替え
+    const SORT_NEW_ARRIVALS = 1;
+    const SORT_VIEW_RANK = 2;
+    const SORT_LIST = [
+        self::SORT_NEW_ARRIVALS => '新着',
+        self::SORT_VIEW_RANK => '人気',
+    ];
+
     // マジックナンバー(作成者本人にしか意味が分からない値)が分かるように定数として定義
     // 公開非公開のステータス
     const STATUS_CLOSE = 0;

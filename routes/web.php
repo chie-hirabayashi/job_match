@@ -14,9 +14,15 @@ use App\Http\Controllers\JobOfferController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [JobOfferController::class, 'index'])
+    ->middleware('auth')
+    ->name('welcome');
+
+Route::get('/welcome', function ()
+{
     return view('welcome');
-})->name('welcome');
+})->middleware('guest')
+    ->name('welcom');
 
 Route::middleware([
     'auth:sanctum',
