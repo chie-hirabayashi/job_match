@@ -91,7 +91,9 @@ class JobOfferController extends Controller
      */
     public function edit(JobOffer $job_offer)
     {
-        //
+        $occupations = Occupation::all();
+        return view('job_offers.edit')
+            ->with(compact('job_offer', 'occupations'));
     }
 
     /**
@@ -103,7 +105,20 @@ class JobOfferController extends Controller
      */
     public function update(jobOfferRequest $request, JobOffer $job_offer)
     {
-        //
+        if (Auth::user()->cannot('update', $job_offer)) {
+            return redirect()->route('job_offers.show', $job_offer)
+                ->withErrors('自分の求人情報以外は更新できません');
+        }
+        $job_offer->fill($request->all());
+        try {
+            $job_offer->save();
+        } catch (\Exception $e) {
+            logger($e);
+            return back()->withInput()
+                ->withErrors('求人情報更新処理でエラーが発生しました');
+        }
+        return redirect()->route('job_offers.show', $job_offer)
+            ->with('notice', '求人情報を更新しました');
     }
 
     /**
